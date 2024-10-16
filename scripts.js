@@ -49,32 +49,40 @@ function split(str, separator = ' ') {
 // Grunnföll sem skilgreina á
 
 function longest(str) {
-  const split = str.split(' ');
-  var longestword = '';
-  
-  for (var i= 0; i < split.length; i++) {
-    if (split[i].length < longestword) {
-      longestword = split[i];
+  //nef ekki strengur null
+  if (!isString(str)) {
+    return ' ';
+  }
+  const words = split(str, ' ');
+
+   let shortest = ' '; 
+  for (const word of words) {
+    if (word.length > shortest.length) {
+      shortest = word;
     }
   }
-  return str;
+  return shortest;
 }
 console.assert(longest ('er að testa') === 'testa', 'longest: skilar lengsta orði í streng');
-
+//NOTAÐI ChatGPT TIL AÐ HJÁLPA VIÐ ÞETTA!
 
 function shortest(str) {
-  const split = str.split(' ');
-  var shortest = 0;
-  var ordS = null;
-  for (var i= 0; i < split.length; i++) {
-    if (shortest > split[i].length) {
-      shortest = split[i].length;
-      ordS = split[i];
+  if (!isString(str)) {
+    return ' ';
+  }
+  const words = split(str, ' ');
+
+   let longest = words [0]; 
+  for (const word of words) {
+    if (word.length < longest.length) {
+      longest = word;
     }
   }
-  return ordS;
+  return longest;
 }
 console.assert(shortest ('er að testa') === 'er', 'shortest: skilar stysta orði í streng');
+//NOTAÐI ChatGPT TIL AÐ HJÁLPA VIÐ ÞETTA!
+
 
 function reverse(str) {
   if (isString(str)) {
@@ -110,27 +118,68 @@ console.assert(palindrome ('') === false, 'palidrome: réttur strengur');
 
 
 function vowels(str) {
-  let strengur = str.toLowerCase();
-  switch(strengur) {
-    case 'a':
-    case 'e':
-    case 'i':
-    case 'o':
-    case 'u':
-      console.log("Stafur er sérhljóði");
-      break;
+  if (isString(str)) {
+    vowelArr = [];
+    for (let i = 0; i < str.length; i++) {
+      let char = str.charAt(i).toLowerCase();
+      if (VOWELS.includes(char)) {
+        vowelArr.push(char);
+      }
+    }
+    return vowelArr.join(' , ');
   }
-  // Útfæra
+  return null;
 }
+console.assert(vowels ('halló') === 'a , ó', 'vowels: skilar sérhljóðum í streng');
+//NOTAÐI ChatGPT TIL AÐ HJÁPA
 
 function consonants(str) {
-  // Útfæra
+  if (isString(str)) {
+    constonantArr = [];
+    for (let i = 0; i < str.length; i++) {
+      let char = str.charAt(i).toLowerCase();
+      if (CONSONANTS.includes(char)) {
+        constonantArr.push(char);
+      }
+    }
+    return constonantArr.join(' , ');
+  }
+  return null;
 }
+console.assert(consonants('halló') === 'h , l , l', 'consonants: skilar samhljóðum í streng ');
+//NOTAÐI ChatGPT TIL AÐ HJÁLPA
 
 //------------------------------------------------------------------------------
 // Leiðbeint ferli
 
 function start() {
-  prompt
-  // Útfæra
-}
+  alert('Halló! Hér getur þú skrifað streng og fengið upplýsinhar um hann');
+  let result = prompt('Vinsamlegast færðu mér streng');
+  if (isString(result)) {
+    const lengsta = longest(result);
+    const stysta = shortest(result);
+    const rev = reverse(result);
+    const pal = palindrome(result);
+    const ser = vowels(result);
+    const sam = consonants(result);
+    
+    let uttak = `Upplýsingar um strenginn þinn "${result}":\n`;
+    uttak += `Lengsta orðið er: ${lengsta}\n`;
+    uttak += `Stysta orðið er: ${stysta}\n`;
+    uttak += `Hérna er það snúið við: ${rev}\n`;
+    uttak += `Er það eins aftur á bak?: ${pal}\n`;
+    uttak += `Sérhljóðarnir í strengnum eru: ${ser}\n`;
+    uttak += `og samhljóðarnir eru: ${sam}\n`;
+
+    alert(uttak);
+    return {
+      lengsta,
+      stysta,
+      rev,
+      pal,
+      ser,
+      sam};
+    }
+    return '';
+  }
+ //NOTAÐI ChatGPT TIL AÐ HJÁLPA
