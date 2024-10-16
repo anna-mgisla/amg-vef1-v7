@@ -49,20 +49,37 @@ function split(str, separator = ' ') {
 // Grunnföll sem skilgreina á
 
 function longest(str) {
-  // Útfæra
+  const split = str.split(' ');
+  var longestword = '';
+  
+  for (var i= 0; i < split.length; i++) {
+    if (split[i].length < longestword) {
+      longestword = split[i];
+    }
+  }
+  return str;
 }
+console.assert(longest ('er að testa') === 'testa', 'longest: skilar lengsta orði í streng');
+
 
 function shortest(str) {
-  // Útfæra
+  const split = str.split(' ');
+  var shortest = 0;
+  var ordS = null;
+  for (var i= 0; i < split.length; i++) {
+    if (shortest > split[i].length) {
+      shortest = split[i].length;
+      ordS = split[i];
+    }
+  }
+  return ordS;
 }
+console.assert(shortest ('er að testa') === 'er', 'shortest: skilar stysta orði í streng');
 
 function reverse(str) {
-  // Útfæra
-  if (isString(srt)) {
-
+  if (isString(str)) {
   const split = str.split('');
   const reversed = split.reverse();
-  
   return reversed.join('');
   }
   return null;
@@ -84,15 +101,25 @@ if (isString(str) && str !== '' ) {
 } 
   return false;
 }
-console.assert(palindrome ('halló' === false, 'palidrome: strengur, réttur strengur'))
-console.assert(palindrome ('hah' === true, 'palidrome: strengur, réttur strengur'))
-console.assert(palindrome ('' === false, 'palidrome: réttur strengur'))
+console.assert(palindrome ('halló') === false, 'palidrome: strengur, réttur strengur');
+console.assert(palindrome ('hah') === true, 'palidrome: strengur, réttur strengur');
+console.assert(palindrome ('') === false, 'palidrome: réttur strengur');
 
 
   // Útfæra
 
 
 function vowels(str) {
+  let strengur = str.toLowerCase();
+  switch(strengur) {
+    case 'a':
+    case 'e':
+    case 'i':
+    case 'o':
+    case 'u':
+      console.log("Stafur er sérhljóði");
+      break;
+  }
   // Útfæra
 }
 
